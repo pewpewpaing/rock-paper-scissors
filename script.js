@@ -17,7 +17,36 @@ function getComputerChoice() {
 // Assumes the user will always enter a valid choice 
 // i.e. either "rock" or "paper" or "scissors"
 function getHumanChoice() {
-    return prompt("Rock, Paper, Scissors?");
+    let humanChoice = prompt("Rock, Paper, Scissors?");
+    return humanChoice.toLowerCase();
 }
 
-console.log(getHumanChoice());
+function playRound(humanChoice, computerChoice) {
+    const capitalisedHumanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
+    const capitalisedComputerChoice = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+    if (
+        humanChoice === "rock" && computerChoice == "scissors" ||
+        humanChoice == "paper" && computerChoice == "rock" ||
+        humanChoice == "scissors" && computerChoice == "paper"
+    ) {
+        humanScore++;
+        console.log(`You win! ${capitalisedHumanChoice} beats ${capitalisedComputerChoice}`);
+    } else if (
+        humanChoice === "rock" && computerChoice == "paper" ||
+        humanChoice == "paper" && computerChoice == "scissors" ||
+        humanChoice == "scissors" && computerChoice == "rock"
+    ) {
+        computerScore++;
+        console.log(`You lose! ${capitalisedComputerChoice} beats ${capitalisedHumanChoice}`);
+    } else {
+        console.log(`You draw! Both choose ${capitalisedComputerChoice}`);
+    }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+
+console.log(`Human Score: ${humanScore}`);
+console.log(`computer Score: ${computerScore}`);
